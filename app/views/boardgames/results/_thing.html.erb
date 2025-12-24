@@ -1,0 +1,40 @@
+<% item = boardgame.dig(:items, :item) %>
+<% item = item.first if item.is_a?(Array) %>
+
+<% primary_name = item[:name].find { |n| n[:type] == "primary" } rescue item[:name] %>
+<% alternate_name = item[:name].find { |n| n[:type] == "alternate" } rescue item[:name] %>
+
+<h1> <%= primary_name[:value] %></h1>
+<% if alternate_name %>
+  <p><em>Alternate name: <%= alternate_name[:value] %></em></p>
+<% end %>
+
+<div>
+  <img src="<%= item[:thumbnail] %>" alt="<%= primary_name[:value] %>">
+</div>
+
+<p><strong>Year Published:</strong> <%= item.dig(:yearpublished, :value) %></p>
+<p><strong>Players:</strong> <%= item.dig(:minplayers, :value) %> - <%= item.dig(:maxplayers, :value) %></p>
+<p><strong>Playing Time:</strong> <%= item.dig(:playingtime, :value) %> minutes</p>
+<p><strong>Minimum Age:</strong> <%= item.dig(:minage, :value) %>+</p>
+
+<h3>Description</h3>
+<p><%= item[:description] %></p>
+
+<h3>Categories</h3>
+<ul>
+  <% item[:link]&.select { |l| l[:type] == "boardgamecategory" }&.each do |link| %>
+    <li><%= link[:value] %></li>
+  <% end %>
+</ul>
+
+<h3>Mechanics</h3>
+<ul>
+  <% item[:link]&.select { |l| l[:type] == "boardgamemechanic" }&.each do |link| %>
+    <li><%= link[:value] %></li>
+  <% end %>
+</ul>
+
+<h3>Designer & Publisher</h3>
+<p><strong>Designer:</strong> <%= item[:link]&.find { |l| l[:type] == "boardgamedesigner" }&.dig(:value) %></p>
+<p><strong>Publisher:</strong> <%= item[:link]&.find { |l| l[:type] == "boardgamepublisher" }&.dig(:value) %></p>

@@ -3,6 +3,7 @@ class BoardgamesController < ApplicationController
   end
 
   def fetch
+    @response = Boardgame.new.fetch(boardgame_params.compact_blank)
   end
 
   private

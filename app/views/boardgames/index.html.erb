@@ -1,7 +1,9 @@
 <h1>Boardgame#index</h1>
 
+<div id="item"></div>
+
 <%= turbo_frame_tag :search do %>
-  <%= form_with model: Boardgame.new, url: boardgame_fetch_path, method: :get, data: { turbo_stream: true } do |form| %>
+  <%= form_with model: Boardgame.new, url: fetch_boardgames_path, method: :get, data: { turbo_stream: true } do |form| %>
     <div>
       <%= form.label :destiny, "Boardgame destiny" %>
       <%= form.select :destiny, Boardgame::DESTINIES, prompt: "Select a destiny", required: true %>

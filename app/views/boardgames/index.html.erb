@@ -1,2 +1,16 @@
-<h1>Boardgames#index</h1>
-<p>Find me in app/views/boardgames/index.html.erb</p>
+<h1>Boardgame#index</h1>
+
+<%= turbo_frame_tag :search do %>
+  <%= form_with model: Boardgame.new, url: boardgame_fetch_path, method: :get, data: { turbo_stream: true } do |form| %>
+    <div>
+      <%= form.label :destiny, "Boardgame destiny" %>
+      <%= form.select :destiny, Boardgame::DESTINIES, prompt: "Select a destiny", required: true %>
+
+      <%= form.label :id %>
+      <%= form.number_field :id, required: true, min: 1 %>
+    </div>
+    <div>
+      <%= form.submit "Search" %>
+    </div>
+  <% end %>
+<% end %>

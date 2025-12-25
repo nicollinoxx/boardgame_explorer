@@ -15,7 +15,7 @@ class Boardgame
     bgg_api = BggRemote.api
 
     case params[:destiny]
-    when "thing" then bgg_api.thing(id: params[:id])
+    when "thing" then bgg_api.thing(id: params[:id]).dig('items', 'item')
     else
       raise ArgumentError, "Unknown destiny: #{params[:destiny]}"
     end

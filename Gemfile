@@ -64,4 +64,4 @@ group :test do
   gem "selenium-webdriver"
 end
 
-gem "bgg_remote", path: "/home/nicolas/Development/my_gems/bgg_remote"
+gem "bgg_remote"

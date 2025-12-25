@@ -1,40 +1,86 @@
-<% item = boardgame.dig(:items, :item) %>
-<% item = item.first if item.is_a?(Array) %>
+<% item = normalize_item(boardgame) %>
 
-<% primary_name = item[:name].find { |n| n[:type] == "primary" } rescue item[:name] %>
-<% alternate_name = item[:name].find { |n| n[:type] == "alternate" } rescue item[:name] %>
+<div class="h-100">
+    <div class="d-flex flex-column flex-md-row gap-4 align-items-stretch">
+      <img src="<%= item["thumbnail"] %>" alt="<%= primary_name(item) %>" class="img-fluid rounded">
 
-<h1> <%= primary_name[:value] %></h1>
-<% if alternate_name %>
-  <p><em>Alternate name: <%= alternate_name[:value] %></em></p>
-<% end %>
+      <div class="d-flex flex-column justify-content-between h-100">
+        <h2 class="text-warning fw-semibold mb-1">
+          <%= primary_name(item) %>
+        </h2>
 
-<div>
-  <img src="<%= item[:thumbnail] %>" alt="<%= primary_name[:value] %>">
+        <% if alternate_name(item) %>
+          <p class="text-muted mb-4">
+            <em>Alternate name: <%= alternate_name(item) %></em>
+          </p>
+        <% end %>
+
+        <div class="d-flex flex-wrap gap-2">
+          <p class="bg-secondary-subtle border p-2 rounded d-flex align-items-center gap-1 mb-0">
+            <i class="bi bi-calendar-event-fill"></i>
+            <strong>Year:</strong>
+            <span><%= item.dig("yearpublished", "value") %></span>
+          </p>
+
+          <p class="bg-secondary-subtle border p-2 rounded d-flex align-items-center gap-1 mb-0">
+            <i class="bi bi-people-fill"></i>
+            <strong>Players:</strong>
+            <span><%= players_range(item) %></span>
+          </p>
+
+          <p class="bg-secondary-subtle border p-2 rounded d-flex align-items-center gap-1 mb-0">
+            <i class="bi bi-alarm-fill"></i>
+            <strong>Playing Time:</strong>
+            <span><%= item.dig("playingtime", "value") %> min</span>
+          </p>
+
+          <p class="bg-secondary-subtle border p-2 rounded d-flex align-items-center gap-1 mb-0">
+            <i class="bi bi-cake-fill"></i>
+            <strong>Minimum Age:</strong>
+            <span><%= item.dig("minage", "value") %>+</span>
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="d-flex align-items-center justify-content-between my-3">
+      <hr class="flex-grow-1 me-3">
+      <i class="bi bi-star-fill text-warning h4 m-0"></i>
+      <hr class="flex-grow-1 ms-3">
+    </div>
+
+    <h5>
+      <i class="bi bi-blockquote-left me-1"></i>
+      Description
+    </h5>
+
+    <p><%= item["description"]&.html_safe %></p>
+
+    <div class="row mt-5">
+      <div class="col-md-6">
+        <h6><i class="bi bi-bookmark me-1"></i> Categories</h6>
+        <ul>
+          <% categories(item).each do |category| %>
+            <li><%= category %></li>
+          <% end %>
+        </ul>
+      </div>
+
+      <div class="col-md-6">
+        <h6><i class="bi bi-hammer me-1"></i> Mechanics</h6>
+        <ul>
+          <% mechanics(item).each do |mechanic| %>
+            <li><%= mechanic %></li>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+
+    <h6 class="mt-2">
+      <i class="bi bi-pencil me-1"></i>
+      Designer & Publisher
+    </h6>
+
+    <p class="m-1"><strong>Designer:</strong> <%= designer(item) %></p>
+    <p class="m-1"><strong>Publisher:</strong> <%= publisher(item) %></p>
 </div>
-
-<p><strong>Year Published:</strong> <%= item.dig(:yearpublished, :value) %></p>
-<p><strong>Players:</strong> <%= item.dig(:minplayers, :value) %> - <%= item.dig(:maxplayers, :value) %></p>
-<p><strong>Playing Time:</strong> <%= item.dig(:playingtime, :value) %> minutes</p>
-<p><strong>Minimum Age:</strong> <%= item.dig(:minage, :value) %>+</p>
-
-<h3>Description</h3>
-<p><%= item[:description] %></p>
-
-<h3>Categories</h3>
-<ul>
-  <% item[:link]&.select { |l| l[:type] == "boardgamecategory" }&.each do |link| %>
-    <li><%= link[:value] %></li>
-  <% end %>
-</ul>
-
-<h3>Mechanics</h3>
-<ul>
-  <% item[:link]&.select { |l| l[:type] == "boardgamemechanic" }&.each do |link| %>
-    <li><%= link[:value] %></li>
-  <% end %>
-</ul>
-
-<h3>Designer & Publisher</h3>
-<p><strong>Designer:</strong> <%= item[:link]&.find { |l| l[:type] == "boardgamedesigner" }&.dig(:value) %></p>
-<p><strong>Publisher:</strong> <%= item[:link]&.find { |l| l[:type] == "boardgamepublisher" }&.dig(:value) %></p>

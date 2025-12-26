@@ -9,9 +9,11 @@
           <%= form.select :destiny, Boardgame::DESTINIES,  { prompt: "Select a destiny" }, class: "form-select", required: true %>
         </div>
 
+
+
         <div class="mb-3">
-          <%= form.label :id, "Boardgame ID", class: "form-label" %>
-          <%= form.number_field :id, min: 1, required: true, class: "form-control" %>
+          <%= form.label :type, "Type", class: "form-label" %>
+          <%= form.select :type, Boardgame::HOT_ITEMS_TYPES,  { prompt: "Select a destiny" }, class: "form-select", required: true %>
         </div>
 
         <%= form.submit "Search", class: "btn btn-warning w-100" %>

@@ -12,7 +12,7 @@ class BoardgamesController < ApplicationController
   private
 
   def boardgame_params
-    params.expect(boardgame: [:destiny, :id, :type, :page, :name, :username, :query])
+    params.expect(boardgame: [:destiny, :id, :type])
   end
 
   def set_boardgame

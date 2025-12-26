@@ -1,0 +1,31 @@
+<div class="container-fluid px-3">
+  <div class="row g-3">
+    <% items.each do |item| %>
+      <div class="col-6 col-sm-4 col-lg-3 col-xl-2">
+        <article class="card h-100 shadow-sm">
+          <div class="position-relative">
+            <div class="ratio ratio-1x1">
+              <%= image_tag item.dig("thumbnail", "value"), class: "card-img-top object-fit-cover", alt: item.dig("name", "value"), loading: "lazy" %>
+            </div>
+
+            <span class="badge bg-dark position-absolute top-0 end-0 m-2">
+              #<%= item["rank"] %>
+            </span>
+          </div>
+
+          <div class="card-body p-3">
+            <h6 class="card-title mb-2 text-truncate" title="<%= item.dig("name", "value") %>">
+              <%= item.dig("name", "value") %>
+            </h6>
+
+            <small class="text-muted">
+              <i class="bi bi-calendar"></i>
+              <%= item.dig("yearpublished", "value") %>
+            </small>
+          </div>
+
+        </article>
+      </div>
+    <% end %>
+  </div>
+</div>

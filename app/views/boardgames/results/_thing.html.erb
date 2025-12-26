@@ -49,10 +49,11 @@
       <hr class="flex-grow-1 ms-3">
     </div>
 
-    <h3 class="bg-warning-subtle text-warning-emphasis px-2 py-1 rounded text-dark d-inline h6">
+    <h3 class="badge text-bg-warning rounded fs-6">
       <i class="bi bi-blockquote-left me-1"></i>
       Description
     </h3>
+
 
     <div class="mt-3">
       <p><%= item["description"]&.html_safe %></p>
@@ -67,7 +68,7 @@
     <div class="row my-3">
       <% if categories(item).any? %>
         <div class="col-md-6">
-          <h4 class="bg-info-subtle text-info-emphasis px-2 py-1 rounded text-dark d-inline h6">
+          <h4 class="badge text-bg-info rounded fs-6">
             <i class="bi bi-bookmark me-1"></i>
             Categories
           </h4>
@@ -82,7 +83,7 @@
 
       <% if mechanics(item).any? %>
         <div class="col-md-6">
-          <h4 class="bg-info-subtle text-info-emphasis px-2 py-1 rounded text-dark d-inline h6">
+          <h4 class="badge text-bg-info rounded fs-6">
             <i class="bi bi-hammer me-1"></i>
             Mechanics
           </h4>
@@ -95,7 +96,7 @@
       <% end %>
     </div>
 
-    <h6 class="bg-warning-subtle text-warning-emphasis px-2 py-1 rounded text-dark d-inline h6">
+    <h6 class="badge text-bg-warning rounded fs-6">
       <i class="bi bi-pencil me-1"></i>
       Designer & Publisher
     </h6>

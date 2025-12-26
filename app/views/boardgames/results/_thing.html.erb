@@ -1,11 +1,11 @@
 <% item = normalize_item(boardgame) %>
 
-<div class="h-100">
+<div class="h-100 px-3 py-2 text-body">
     <div class="d-flex flex-column flex-md-row gap-4 align-items-stretch">
-      <img src="<%= item["thumbnail"] %>" alt="<%= primary_name(item) %>" class="img-fluid rounded">
+      <img src="<%= item["thumbnail"] %>" alt="<%= primary_name(item) %>" class="img-fluid rounded" style="max-height: 275px;">
 
       <div class="d-flex flex-column justify-content-between h-100">
-        <h2 class="text-warning fw-semibold mb-1">
+        <h2 class="text-warning fw-semibold mb-3">
           <%= primary_name(item) %>
         </h2>
 
@@ -16,25 +16,25 @@
         <% end %>
 
         <div class="d-flex flex-wrap gap-2">
-          <p class="bg-secondary-subtle border p-2 rounded d-flex align-items-center gap-1 mb-0">
+          <p class="bg-body-secondary-subtle border border-warning px-2 p-1 rounded d-flex align-items-center gap-1">
             <i class="bi bi-calendar-event-fill"></i>
             <strong>Year:</strong>
             <span><%= item.dig("yearpublished", "value") %></span>
           </p>
 
-          <p class="bg-secondary-subtle border p-2 rounded d-flex align-items-center gap-1 mb-0">
+          <p class="bg-body-secondary-subtle border border-info px-2 p-1 rounded d-flex align-items-center gap-1">
             <i class="bi bi-people-fill"></i>
             <strong>Players:</strong>
             <span><%= players_range(item) %></span>
           </p>
 
-          <p class="bg-secondary-subtle border p-2 rounded d-flex align-items-center gap-1 mb-0">
+          <p class="bg-body-secondary-subtle border border-warning px-2 p-1 rounded d-flex align-items-center gap-1">
             <i class="bi bi-alarm-fill"></i>
             <strong>Playing Time:</strong>
             <span><%= item.dig("playingtime", "value") %> min</span>
           </p>
 
-          <p class="bg-secondary-subtle border p-2 rounded d-flex align-items-center gap-1 mb-0">
+          <p class="bg-body-secondary-subtle border border-info px-2 p-1 rounded d-flex align-items-center gap-1">
             <i class="bi bi-cake-fill"></i>
             <strong>Minimum Age:</strong>
             <span><%= item.dig("minage", "value") %>+</span>
@@ -49,38 +49,59 @@
       <hr class="flex-grow-1 ms-3">
     </div>
 
-    <h5>
+    <h3 class="bg-warning-subtle text-warning-emphasis px-2 py-1 rounded text-dark d-inline h6">
       <i class="bi bi-blockquote-left me-1"></i>
       Description
-    </h5>
+    </h3>
 
-    <p><%= item["description"]&.html_safe %></p>
+    <div class="mt-3">
+      <p><%= item["description"]&.html_safe %></p>
+    <div>
 
-    <div class="row mt-5">
-      <div class="col-md-6">
-        <h6><i class="bi bi-bookmark me-1"></i> Categories</h6>
-        <ul>
-          <% categories(item).each do |category| %>
-            <li><%= category %></li>
-          <% end %>
-        </ul>
-      </div>
-
-      <div class="col-md-6">
-        <h6><i class="bi bi-hammer me-1"></i> Mechanics</h6>
-        <ul>
-          <% mechanics(item).each do |mechanic| %>
-            <li><%= mechanic %></li>
-          <% end %>
-        </ul>
-      </div>
+    <div class="d-flex align-items-center justify-content-between my-3">
+      <hr class="flex-grow-1 me-3">
+      <i class="bi bi-stars text-info h4 m-0"></i>
+      <hr class="flex-grow-1 ms-3">
     </div>
 
-    <h6 class="mt-2">
+    <div class="row my-3">
+      <% if categories(item).any? %>
+        <div class="col-md-6">
+          <h4 class="bg-info-subtle text-info-emphasis px-2 py-1 rounded text-dark d-inline h6">
+            <i class="bi bi-bookmark me-1"></i>
+            Categories
+          </h4>
+
+          <ul class="mt-3">
+            <% categories(item).each do |category| %>
+              <li><%= category %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+
+      <% if mechanics(item).any? %>
+        <div class="col-md-6">
+          <h4 class="bg-info-subtle text-info-emphasis px-2 py-1 rounded text-dark d-inline h6">
+            <i class="bi bi-hammer me-1"></i>
+            Mechanics
+          </h4>
+          <ul class="my-3">
+            <% mechanics(item).each do |mechanic| %>
+              <li><%= mechanic %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+    </div>
+
+    <h6 class="bg-warning-subtle text-warning-emphasis px-2 py-1 rounded text-dark d-inline h6">
       <i class="bi bi-pencil me-1"></i>
       Designer & Publisher
     </h6>
 
-    <p class="m-1"><strong>Designer:</strong> <%= designer(item) %></p>
-    <p class="m-1"><strong>Publisher:</strong> <%= publisher(item) %></p>
+    <div class="mt-3">
+      <p class="m-1"><strong>Designer:</strong> <%= designer(item) || "undefined" %></p>
+      <p class="m-1"><strong>Publisher:</strong> <%= publisher(item) || "undefined"%></p>
+    </div>
 </div>

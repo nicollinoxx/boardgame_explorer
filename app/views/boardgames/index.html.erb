@@ -1,40 +1,26 @@
-<h1>Boadgame explorer</h1>
+<h1 class="fw-semibold text-warning">Boadgame explorer</h1>
 
 <div class="row g-4 align-items-start">
   <div class="col-12 col-lg-4">
-    <div class="card shadow-sm h-100">
-      <div class="card-body">
+    <div class="bg-body rounded p-3 h-100">
+      <%= form_with model: @boardgame, url: fetch_boardgames_path, method: :get, data: { turbo_stream: true } do |form| %>
+        <div class="mb-3">
+          <%= form.label :destiny, "Boardgame destiny", class: "form-label" %>
+          <%= form.select :destiny, Boardgame::DESTINIES,  { prompt: "Select a destiny" }, class: "form-select", required: true %>
+        </div>
 
-          <%= form_with model: @boardgame,
-                        url: fetch_boardgames_path,
-                        method: :get,
-                        data: { turbo_stream: true } do |form| %>
+        <div class="mb-3">
+          <%= form.label :id, "Boardgame ID", class: "form-label" %>
+          <%= form.number_field :id, min: 1, required: true, class: "form-control" %>
+        </div>
 
-            <div class="mb-3">
-              <%= form.label :destiny, "Boardgame destiny", class: "form-label" %>
-              <%= form.select :destiny,
-                              Boardgame::DESTINIES,
-                              { prompt: "Select a destiny" },
-                              class: "form-select",
-                              required: true %>
-            </div>
-
-            <div class="mb-3">
-              <%= form.label :id, "Boardgame ID", class: "form-label" %>
-              <%= form.number_field :id,
-                                    min: 1,
-                                    required: true,
-                                    class: "form-control" %>
-            </div>
-
-            <%= form.submit "Search", class: "btn btn-warning w-100" %>
-          <% end %>
-      </div>
+        <%= form.submit "Search", class: "btn btn-warning w-100" %>
+      <% end %>
     </div>
   </div>
 
-  <div class="col-12 col-lg-8">
-    <div id="item" class="border rounded p-3">
+  <div class="col-auto col-lg-8">
+    <div id="item" class="mt-4">
     </div>
   </div>
 </div>

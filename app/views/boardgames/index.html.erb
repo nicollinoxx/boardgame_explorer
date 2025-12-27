@@ -1,27 +1,34 @@
 <h1 class="fw-semibold text-warning">Boadgame explorer</h1>
 
 <div class="row g-4 align-items-start">
-  <div class="col-12 col-lg-4">
-    <div class="bg-body rounded p-3 h-100">
-      <%= form_with model: @boardgame, url: fetch_boardgames_path, method: :get, data: { turbo_stream: true } do |form| %>
-        <div class="mb-3">
-          <%= form.label :destiny, "Boardgame destiny", class: "form-label" %>
-          <%= form.select :destiny, Boardgame::DESTINIES,  { prompt: "Select a destiny" }, class: "form-select", required: true %>
-        </div>
+  <div class="bg-body sticky-top col-12 col-lg-4" data-controller="dynamic-form">
+    <%= form_with model: @boardgame, url: fetch_boardgames_path, method: :get, data: { turbo_stream: true } do |form| %>
+      <div class="mb-3" data-action="change->dynamic-form#update">
+        <%= form.label :destiny, "Boardgame destiny", class: "form-label" %>
+        <%= form.select :destiny, Boardgame::DESTINIES, { prompt: "Select a destiny" }, class: "form-select border border-primary-subtle border-2", required: true %>
+      </div>
 
+      <div class="mb-3" data-dynamic-form-target="group" hidden>
+        <%= form.label :id, "Boardgame ID", class: "form-label" %>
+        <%= form.number_field :id, min: 1, required: true, disabled: true, class: "form-control border border-primary-subtle border-2",
+          data: { dynamic_form_target: "field", onchange: "this.form.requestSubmit();" } %>
+      </div>
 
+      <div class="mb-3" data-dynamic-form-target="group" hidden>
+        <%= form.label :type, "Type", class: "form-label" %>
+        <%= form.select :type, Boardgame::HOT_ITEMS_TYPES, { prompt: "Select a destiny" }, class: "form-select border border-primary-subtle border-2",
+          required: true, disabled: true, onchange: "this.form.requestSubmit()", data: { dynamic_form_target: "field" } %>
+      </div>
+    <% end %>
 
-        <div class="mb-3">
-          <%= form.label :type, "Type", class: "form-label" %>
-          <%= form.select :type, Boardgame::HOT_ITEMS_TYPES,  { prompt: "Select a destiny" }, class: "form-select", required: true %>
-        </div>
-
-        <%= form.submit "Search", class: "btn btn-warning w-100" %>
-      <% end %>
+    <div class="d-flex align-items-center text-primary justify-content-between my-0">
+      <hr class="flex-grow-1 me-3">
+      <i class="bi bi-stars h4 m-0"></i>
+      <hr class="flex-grow-1 ms-3">
     </div>
   </div>
 
-  <div class="col-auto col-lg-8">
+  <div class="col-12 col-lg-8">
     <div id="item" class="mt-4">
     </div>
   </div>

@@ -19,8 +19,10 @@
             </h6>
 
             <small class="text-muted">
-              <i class="bi bi-calendar"></i>
-              <%= item.dig("yearpublished", "value") %>
+              <i class="bi bi-calendar me-1"></i>
+              <%= item.dig("yearpublished", "value") %> <br>
+
+              <i class="bi bi-key-fill text-warning me-1"></i> <%= item["id"] %>
             </small>
           </div>
 

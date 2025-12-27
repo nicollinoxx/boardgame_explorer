@@ -1,5 +1,7 @@
 <%= turbo_stream.update :item do %>
-  <%= render "boardgames/results/thing", boardgame: @response if params.dig(:boardgame, :destiny) == 'thing' %>
+  <% if params.dig(:boardgame, :destiny) == 'thing' %>
+    <%= render "boardgames/results/thing", boardgame: @response %>
+  <% end %>
 
   <% if params.dig(:boardgame, :destiny) == 'hot_items' %>
     <%= render "boardgames/results/hot_items", items: @response %>

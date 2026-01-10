@@ -24,7 +24,7 @@ class Boardgame
   end
 
   def available_destiny_to? destiny
-    ["thing", "hot_items"].include?(destiny)
+    ['thing', 'hot_items'].include?(destiny)
   end
 
   def cache_key params

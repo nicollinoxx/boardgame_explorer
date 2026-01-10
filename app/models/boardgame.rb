@@ -7,7 +7,7 @@ class Boardgame
   def fetch params
     return unless available_destiny_to? params[:destiny]
 
-    Rails.cache.fetch(cache_key(params), expires_in: 2.hours) do
+    Rails.cache.fetch(cache_key(params), expires_in: 2.hours, skip_nil: true) do
       dispatch(params)&.dig('items', 'item')
     end
   end

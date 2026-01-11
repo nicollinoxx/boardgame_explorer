@@ -22,8 +22,8 @@
     <%= javascript_importmap_tags %>
   </head>
 
-  <body>
-    <div class="container-fluid my-4">
+  <body class="d-flex flex-column min-vh-100">
+    <div class="container-fluid my-4 flex-grow-1">
       <% if alert.present? %>
         <div class="alert alert-warning alert-dismissible fade show" role="alert">
           <%= alert %>
@@ -33,5 +33,7 @@
 
       <%= yield %>
     </div>
+
+    <%= render "layouts/footer" %>
   </body>
 </html>

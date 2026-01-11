@@ -1,6 +1,4 @@
 class Boardgame
-  include ActiveModel::Model
-
   DESTINIES = { 'Thing' => 'thing', 'Hot items' => 'hot_items' }.freeze
   HOT_ITEMS_TYPES = { 'Boardgame' => 'boardgame', 'Rpg' => 'rpg' }.freeze
 

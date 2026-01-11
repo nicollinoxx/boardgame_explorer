@@ -9,12 +9,11 @@ servers:
   web:
     - 46.224.4.204
 
-# Configure proxy without SSL (no domain)
-# Access via: http://46.224.4.204 with Host header "boardgame-explorer"
-# Or add to /etc/hosts: 46.224.4.204 boardgame-explorer
+# Configure proxy with subdomain of fitplan.vip
+# Access via: https://boardgame.fitplan.vip
 proxy:
-  ssl: false
-  host: boardgame-explorer
+  ssl: true
+  host: boardgame.fitplan.vip
 
 # Credentials for your image host.
 registry:

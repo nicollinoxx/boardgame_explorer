@@ -4,7 +4,7 @@
       <article class="card h-100 shadow-sm">
         <div class="position-relative">
           <div class="ratio ratio-1x1">
-            <%= image_tag item.dig("thumbnail", "value"), class: "card-img-top img-fluid", alt: item.dig("name", "value"), loading: "lazy" %>
+            <%= image_tag(item.dig("thumbnail", "value"), class: "card-img-top", alt: item.dig("name", "value"), loading: "lazy") %>
           </div>
 
           <span class="badge bg-dark position-absolute top-0 end-0 m-2">

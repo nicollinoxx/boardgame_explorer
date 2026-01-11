@@ -1,5 +1,5 @@
 module BoardgamesHelper
-  def normalize_item(boardgame)
+  def normalize(boardgame)
     boardgame.is_a?(Array) ? boardgame.first : boardgame
   end
 

@@ -7,7 +7,7 @@ image: nicollinoxx/boardgame_explorer
 # Deploy to these servers.
 servers:
   web:
-    - 46.224.4.204
+    - 64.181.176.150
 
 # Configure proxy with subdomain of fitplan.vip
 # Access via: https://boardgame.fitplan.vip
@@ -17,9 +17,7 @@ proxy:
 
 # Credentials for your image host.
 registry:
-  username: nicollinoxx
-  password:
-    - KAMAL_REGISTRY_PASSWORD
+  server: localhost:5555
 
 # Inject ENV variables into containers (secrets come from .kamal/secrets).
 env:
@@ -34,7 +32,7 @@ aliases:
   console: app exec --interactive --reuse "bin/rails console"
   shell: app exec --interactive --reuse "bash"
   logs: app logs -f
-  dbc: app exec --interactive --reuse "bin/rails dbconsole"
+  dbc: app exec --interactive --reuse "bin/rails dbconsole --include-password"
 
 # Use a persistent storage volume for sqlite database files and local Active Storage files.
 volumes:
@@ -47,3 +45,6 @@ asset_path: /rails/public/assets
 # Configure the image builder.
 builder:
   arch: amd64
+
+ssh:
+  user: ubuntu

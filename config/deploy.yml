@@ -26,6 +26,7 @@ env:
   clear:
     # Solid Queue disabled - not using background jobs
     SOLID_QUEUE_IN_PUMA: false
+    WEB_CONCURRENCY: 0
 
 # Aliases are triggered with "bin/kamal <alias>". You can overwrite arguments on invocation:
 aliases:

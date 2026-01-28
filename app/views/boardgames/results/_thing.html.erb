@@ -1,6 +1,8 @@
 <div class="h-100 px-3 py-2 text-body">
     <div class="d-flex flex-column flex-md-row gap-4 align-items-stretch">
-      <img src="<%= boardgame["thumbnail"] %>" alt="<%= primary_name(boardgame) %>" class="img-fluid rounded">
+      <% if boardgame["thumbnail"].present? %>
+        <%= image_tag boardgame["thumbnail"], alt: primary_name(boardgame), class: "img-fluid rounded", style: "max-height: 25rem" %>
+      <% end %>
 
       <div class="d-flex flex-column justify-content-between h-100">
         <h2 class="text-warning fw-semibold mb-3">

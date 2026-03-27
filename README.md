@@ -1,24 +1,19 @@
-# README
+# Boardgame Explorer
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Ruby on Rails web app for exploring board games using the BoardGameGeek API.
 
-Things you may want to cover:
+🔗 [http://boardgame.fitplan.vip](https://boardgame.fitplan.vip)
 
-* Ruby version
+## Overview
+Demo project for the bgg_remote library, focused on API integration, data fetching, and structured display.
 
-* System dependencies
+## Features
+- Search board games via external API  
+- Fetch and process XML/JSON data  
+- Request caching for performance optimization  
 
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+## Tech
+- Ruby on Rails  
+- bgg_remote  
+- HTTP requests  
+- Caching  
